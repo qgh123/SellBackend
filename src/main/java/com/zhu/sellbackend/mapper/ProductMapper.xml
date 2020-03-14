@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhu.sellbackend.mapper.ProductMapper">
+
+    <select id="getProduct" resultType="com.zhu.sellbackend.vo.ProductVO">
+        select p.id,
+            p.product_name productName,
+            p.product_price productPrice,
+            p.product_stock productStock,
+            p.product_description productDescription,
+            p.product_image productImage,
+            p.product_status productStatus,
+            c.category_name categoryName
+        from product p
+        left join category c on p.category_id = c.id
+        <where>
+            <if test="searchVO.categoryId!=null and searchVO.categoryId!=''">
+                c.id = #{searchVO.categoryId}
+            </if>
+            <if test="searchVO.productName!=null and searchVO.productName!=''">
+                and p.product_name like concat('%',#{searchVO.productName},'%')
+            </if>
+            <if test="searchVO.productStatus!=null and searchVO.productStatus!=''">
+                and p.product_status = #{searchVO.productStatus}
+            </if>
+        </where>
+    </select>
+    
+</mapper>

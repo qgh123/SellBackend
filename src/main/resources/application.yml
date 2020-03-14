@@ -1,0 +1,33 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /sell/
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #\u5F00\u53D1\u73AF\u5883\u4F7F\u7528\u6027\u80FD\u5206\u6790\u5DE5\u5177
+      driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+      url: jdbc:p6spy:mysql://localhost:3306/sell?useUnicode=true&characterEncoding=utf-8&serverTimezone=Hongkong&allowMultiQueries=true
+      username: root
+      password: 123
+mybatis-plus:
+  mapper-locations: classpath:com/zhu/sellbackend/mapper/**/*.xml
+  configuration:
+    jdbc-type-for-null: null
+    map-underscore-to-camel-case: true
+
+#\u963F\u91CC\u4E91\u77ED\u4FE1
+aliyun:
+  sms:
+    accessKey: LTAIdkRZAJRCkYWp
+    accessKeySecret: yTgeNPBkhsjpQk61gKFWpxWG7YalP3
+    template:
+      code: SMS_184221356
+
+#\u4E03\u725B\u4E91\u6587\u4EF6\u4E0A\u4F20\u670D\u52A1
+qiniu:
+  accessKey: hH8uD22tsXnXMo15IIgYhAqcPLOD3klTN9Dc8e4E
+  secretKey: wm_4PdVj_fgU753mHibsxeM2c3VxNOa26RoE-yAZ
+  bucketName: imageserver
